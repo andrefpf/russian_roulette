@@ -1,3 +1,5 @@
+import os
+
 class Bet:
     def __init__(self, price, kind_of_bet):
         self.price = price 
@@ -10,7 +12,7 @@ class Bet:
 
     def low_high(self):
         options = [list(range(1, 19)), list(range(19, 37))]
-        print()
+        os.system('clear')
         print('Select the range')
         print('0 - Low')
         print('1 - High')
@@ -20,7 +22,7 @@ class Bet:
     def red_black(self):
         options = [[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36], 
                    [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35],]
-        print()
+        os.system('clear')
         print('Select the range')
         print('0 - Red')
         print('1 - Black')
@@ -30,7 +32,7 @@ class Bet:
     def even_odd(self):
         options = [[i for i in range(1, 37) if i%2 == 0],
                    [i for i in range(1, 37) if i%2 == 1],]
-        print()
+        os.system('clear')
         print('Select the range')
         print('0 - Even')
         print('1 - Odd')
@@ -39,7 +41,7 @@ class Bet:
 
     def dozen(self):
         options = [list(range(1, 13)), list(range(13, 25)), list(range(25, 37))]
-        print()
+        os.system('clear')
         print('Select the range')
         print('0 - 1 to 12')
         print('1 - 13 to 24')
@@ -51,7 +53,7 @@ class Bet:
         options = [[3,6,9,12,15,18,21,24,27,30], 
                    [2,5,8,11,14,17,20,23,26,29], 
                    [1,4,7,10,13,16,19,22,25,28],]
-        print()
+        os.system('clear')
         print('Select the range')
         print('0 - Column 0')
         print('1 - Column 1')
@@ -60,7 +62,7 @@ class Bet:
         self.range = options[selected]
         
     def single(self):
-        print()
+        os.system('clear')
         print('Select a number between 1 and 36')
         selected = int(input())
         self.range = [selected]

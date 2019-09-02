@@ -1,4 +1,5 @@
 from bet import Bet
+import os
 
 class Player:
     def __init__(self, name):
@@ -7,12 +8,13 @@ class Player:
         self.passed_rounds = 0
         self.bets = []
     
-    def pass_round(self):
-        self.passed_rounds += 1
-    
     def start_betting(self):
         while True:
-            print()
+            os.system('clear')
+            print('Betted: {}'.format(self.get_betted()))
+            print('Your Money: {}'.format(self.chips))
+            print('Passed Rounds: {}'.format(self.passed_rounds))
+            print('*****************************')
             print('What kind of bet do you want {}?'.format(self.name))
             print('0 - Next                     ')
             print('1 - Low or High              ')
@@ -23,11 +25,17 @@ class Player:
             print('6 - Single                   ')
             bet_type = int(input())
 
-            if bet_type == 0:
+            if bet_type == 0 and self.bets == [] and self.passed_rounds >= 3:
+                print('You exceeded your right to pass')
+                input()
+                continue
+            elif bet_type == 0:
+                if self.bets == []:
+                    self.passed_rounds += 1
                 break
 
             while True:
-                print()
+                os.system('clear')
                 print('How much do you want to bet?')
                 price = int(input())
 
@@ -47,5 +55,11 @@ class Player:
         for bet in self.bets:
             if number in bet.range:
                 owned += bet.winning_price()
-
         return owned
+
+    def get_betted(self):
+        betted = 0
+        for bet in self.bets:
+            betted += bet.price
+        return betted
+

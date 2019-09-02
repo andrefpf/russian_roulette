@@ -1,4 +1,5 @@
 from random import randint
+import os
 
 class Game:
     def __init__(self, players, roulette_type=''):
@@ -22,18 +23,23 @@ class Game:
         randint(0, 37)
 
     def premiate(self, number):
+        os.system('clear')
         print('Number:', number)
         for player in self.players:
             owned = player.owned_money(number)
             print(player.name, owned)
             self.budget -= owned
             player.chips += owned
+            player.bets = []
+        input()
 
     def eliminate_players(self):
         for index, player in enumerate(self.players):
             if player.chips <= 0:
                 print('{} foi eliminado'.format(player.name))
+                input()
                 self.players.pop(index)
 
     def game_over(self):
         print(self.players[0].name, 'venceu')
+        input()
