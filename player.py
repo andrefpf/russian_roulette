@@ -1,5 +1,7 @@
-from bet import Bet
 import os
+from americanBet import AmericanBet
+from europeanBet import EuropeanBet
+from frenchBet import FrenchBet
 
 class Player:
     def __init__(self, name):
@@ -8,7 +10,7 @@ class Player:
         self.passed_rounds = 0
         self.bets = []
     
-    def start_betting(self):
+    def start_betting(self, roulette_type):
         while True:
             os.system('clear')
             print('Betted: {}'.format(self.get_betted()))
@@ -16,6 +18,7 @@ class Player:
             print('Passed Rounds: {}'.format(self.passed_rounds))
             print('*****************************')
             print('What kind of bet do you want {}?'.format(self.name))
+            print('                             ')
             print('0 - Next                     ')
             print('1 - Low or High              ')
             print('2 - Red or Black             ')
@@ -23,6 +26,11 @@ class Player:
             print('4 - Dozen                    ')
             print('5 - Column                   ')
             print('6 - Single                   ')
+            print('7 - Split                    ')
+            print('8 - Street                   ')
+            print('9 - Square                   ')
+            print('10 - Neighbors of Zero   ')
+            print('*****************************')
             bet_type = int(input())
 
             if bet_type == 0 and self.bets == [] and self.passed_rounds >= 3:
@@ -47,7 +55,12 @@ class Player:
                     print('Haha, Very funny')
                 else:
                     self.chips -= price
-                    self.bets.append(Bet(price, bet_type))
+                    if roulette_type == 0:
+                        self.bets.append(AmericanBet(price, bet_type))
+                    elif roulette_type == 1:
+                        self.bets.append(EuropeanBet(price, bet_type))
+                    else:
+                        self.bets.append(FrenchBet(price, bet_type))
                     break
 
     def owned_money(self, number):

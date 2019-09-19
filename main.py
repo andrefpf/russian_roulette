@@ -1,6 +1,6 @@
-from player import Player
-from game import Game
 import os
+from game import Game
+from player import Player
 
 def show_ready_players():
     os.system('clear')
@@ -16,13 +16,24 @@ def new_player():
     players.append(Player(name))
 
 def start_game():
-    game = Game(players)
+    game = Game(players, roulette_type)
 
 players = []
+print('WARNING!')
+print('You might use a roulette picture to play this.')
+print()
+print('What kind of roulette do you want to play?')
+print('0 - American')
+print('1 - European')
+print('2 - French  ')
+roulette_type = int(input())
+
+os.system('clear')
 print('How many players are going to play?')
 num_players = int(input())
 
 for p in range(num_players):
     new_player()
+
 
 start_game()
